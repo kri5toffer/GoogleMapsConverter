@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
-    func isValidGoogleMapURL (_ urlString: String) -> Bool {
+    func isValidGoogleMapsURL (_ urlString: String) -> Bool {
         guard let url = URL(string: urlString) else {
             return false
         }
@@ -23,6 +23,28 @@ struct ContentView: View {
         return isGoogleMaps || isGooGl
     }
     
+    // Add this function to handle the URL
+    func handleMapURL() {
+        // Trim whitespace and newlines
+        let trimmedURL = mapURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if trimmedURL.isEmpty {
+            alertMessage = "Please enter a URL"
+            showAlert = true
+            return
+        }
+        
+        if !isValidGoogleMapsURL(trimmedURL) {
+            alertMessage = "Please enter a valid Google Maps URL"
+            showAlert = true
+            return
+        }
+        
+        // If we get here, we have a valid URL
+        alertMessage = "Valid URL! Ready for conversion"
+        showAlert = true
+        // We'll add conversion logic in the next step
+    }
     
     var body: some View {
         NavigationView {
@@ -30,14 +52,10 @@ struct ContentView: View {
                 TextField("Paste Google Maps URL", text: $mapURL)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+                    .autocapitalization(.none) // Add this to prevent auto-capitalization
+                    .disableAutocorrection(true) // Add this to prevent autocorrect
                 
-                Button(action: {
-                    // We'll add conversion logic later
-                    if mapURL.isEmpty {
-                        alertMessage = "Please enter a URL"
-                        showAlert = true
-                    }
-                }) {
+                Button(action: handleMapURL) {
                     Text("Convert to GPX")
                         .padding()
                         .background(Color.blue)
@@ -48,7 +66,9 @@ struct ContentView: View {
             .padding()
             .navigationTitle("Route Converter")
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("Notice"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Notice"),
+                      message: Text(alertMessage),
+                      dismissButton: .default(Text("OK")))
             }
         }
     }
