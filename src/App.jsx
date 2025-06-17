@@ -3,18 +3,18 @@ import { extractRouteInfo } from './services/urlExtractor';
 import { generateGpxContent } from './services/gpxGenerator';
 import { downloadGpxFile } from './utils/fileDownloader';
 
-function App() {
-  const [url, setUrl] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [routeInfo, setRouteInfo] = useState(null);
+function App() {  // This is the main function that creates our React app - it's like the container for all our features
+  const [url, setUrl] = useState(''); // This creates a variable 'url' to store the Google Maps URL that users type in, and setUrl is a function we use to update it
+  const [error, setError] = useState(''); // This creates a variable 'error' to show error messages to users when something goes wrong, and setError lets us set new error messages
+  const [success, setSuccess] = useState(false); // This creates a variable 'success' that we use to show when things worked correctly - true means success, false means not yet successful
+  const [loading, setLoading] = useState(false); // This creates a variable 'loading' that we use to show when the app is working on something - true means loading, false means not loading
+  const [routeInfo, setRouteInfo] = useState(null); // This creates a variable 'routeInfo' to store all the information we get from the Google Maps URL, and setRouteInfo lets us save new information
 
-  const handleUrlChange = (e) => {
-    setUrl(e.target.value);
-    setError('');
-    setSuccess(false);
-    setRouteInfo(null);
+  const handleUrlChange = (e) => { // This is a function that React calls whenever someone types in the URL input box - 'e' is the event object that React gives us with information about what changed
+    setUrl(e.target.value); // We use the setUrl function (that useState gave us) to save whatever the user typed (e.target.value) into our url variable
+    setError(''); // We use setError to clear out any error message by setting it to an empty string - this gives the user a fresh start when they start typing again
+    setSuccess(false); // We use setSuccess to set our success flag back to false since we're starting fresh with new input
+    setRouteInfo(null); // We use setRouteInfo to clear out any previously saved route information by setting it to null, since the new URL might give us different route info
   };
 
   const handleAnalyzeUrl = async () => {

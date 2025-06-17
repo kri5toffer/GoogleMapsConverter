@@ -1,10 +1,10 @@
-# Google Maps Route to GPX File Converter
+# Google Maps Route to GPX File Converter (In-development)
 
 A React application that converts Google Maps routes to GPX files for use in GPS devices and fitness applications.
 
 ## Why I Built This
 
-As a cyclist, I got really frustrated with my Wahoo device's routing. It kept sending me down tiny side streets and weird shortcuts that weren't great for cycling. But I noticed that Google Maps actually gives much better cycling routes - it seems to understand which roads are better for bikes. The problem was, I couldn't easily get these Google Maps routes onto my Wahoo. I'd find a great route on Google Maps, but then I'd be stuck trying to recreate it manually on my Wahoo, which was a pain. So I built this tool to take my Google Maps routes and convert them to GPX files that work with my Wahoo, using Google's better routing algorithm instead of Wahoo's. It's super simple to transfer routes between platforms, and it helps other cyclists avoid the same frustration I had. Now I can plan my rides on Google Maps (which I trust more) and still use my Wahoo for navigation. It's made my cycling experience so much better!
+As a cyclist, I got really frustrated with my Wahoo device's routing. It kept sending me down tiny side streets and weird shortcuts that weren't great for cycling. But I noticed that Google Maps actually gives much better cycling routes - it seems to understand which roads are better for bikes. The problem was, I couldn't easily get these Google Maps routes onto my Wahoo. I'd find a fast route on Google Maps, but then I'd be stuck trying to recreate it manually on my Wahoo, which was a pain. So I built this tool to take my Google Maps routes and convert them to GPX files that work with my Wahoo, using Google's better routing algorithm instead of Wahoo's.
 
 ## Project Structure
 
@@ -38,7 +38,7 @@ As a cyclist, I got really frustrated with my Wahoo device's routing. It kept se
 - [ ] Custom GPX file naming
 - [ ] Display distance and elevation profile
 
-## Known Issues and Blockers
+## Blockers
 
 1. URL Parsing Challenges
    - Short URLs (maps.app.goo.gl) are problematic because they require an extra step to resolve to the full URL before we can extract coordinates

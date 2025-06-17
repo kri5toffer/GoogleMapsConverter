@@ -1,24 +1,24 @@
 export const extractRouteInfo = async (url) => {
   // Check if it's a short URL (maps.app.goo.gl or goo.gl/maps)
-  if (url.includes('maps.app.goo.gl') || url.includes('goo.gl/maps')) {
+  if (url.includes('maps.app.goo.gl') || url.includes('goo.gl/maps')) { // Example: "https://maps.app.goo.gl/xyz" or "https://goo.gl/maps/xyz"
     try {
       // Try to extract route info from a standard URL pattern first
       // For full Google Maps URLs with coordinates in the path
-      const dirRegex = /\/maps\/dir\/([^/]+)\/([^/]+)\//;
-      const dirMatch = url.match(dirRegex);
+      const dirRegex = /\/maps\/dir\/([^/]+)\/([^/]+)\//; // Example: "/maps/dir/New+York/Los+Angeles/"
+      const dirMatch = url.match(dirRegex); // Example: ["maps/dir/New+York/Los+Angeles/", "New+York", "Los+Angeles"]
 
       if (dirMatch) {
         // Remove plus symbols and decode URI components for human-readable places
-        const startPoint = decodeURIComponent(dirMatch[1].replace(/\+/g, ' '));
-        const endPoint = decodeURIComponent(dirMatch[2].replace(/\+/g, ' '));
+        const startPoint = decodeURIComponent(dirMatch[1].replace(/\+/g, ' ')); // Example: "New York"
+        const endPoint = decodeURIComponent(dirMatch[2].replace(/\+/g, ' ')); // Example: "Los Angeles"
         
         return {
           type: 'route',
-          startPoint,
-          endPoint,
+          startPoint, // Example: "New York"
+          endPoint, // Example: "Los Angeles"
           // We don't have exact coordinates here, but we have place names
-          startCoordinates: { lat: null, lng: null },
-          endCoordinates: { lat: null, lng: null }
+          startCoordinates: { lat: null, lng: null }, // Example: {lat: null, lng: null}
+          endCoordinates: { lat: null, lng: null } // Example: {lat: null, lng: null}
         };
       }
 
